@@ -1,9 +1,23 @@
-.toolbar-spacer {
-  flex: 1 1 auto;
+:host {
+  display: block;
+  height: 100vh;
 }
 
-mat-toolbar {
-  margin-bottom: 20px;
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 250px;
+  background-color: #fafafa;
+}
+
+.content {
+  padding: 20px;
+}
+
+.toolbar-spacer {
+  flex: 1 1 auto;
 }
 
 button {
