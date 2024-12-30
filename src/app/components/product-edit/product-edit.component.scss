@@ -1,0 +1,21 @@
+.product-edit-container {
+  padding: 20px;
+
+  mat-card {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+  }
+} 

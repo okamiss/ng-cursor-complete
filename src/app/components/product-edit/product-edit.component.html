@@ -1,0 +1,48 @@
+<div class="product-edit-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ isEditMode ? '编辑商品' : '新增商品' }}</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>商品名称</mat-label>
+          <input matInput formControlName="name" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>描述</mat-label>
+          <textarea matInput formControlName="description" required></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>价格</mat-label>
+          <input matInput type="number" formControlName="price" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>分类</mat-label>
+          <input matInput formControlName="category" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>库存数量</mat-label>
+          <input matInput type="number" formControlName="stockQuantity" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>图片URL</mat-label>
+          <input matInput formControlName="imageUrl">
+        </mat-form-field>
+
+        <div class="button-container">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!productForm.valid">
+            {{ isEditMode ? '更新' : '创建' }}
+          </button>
+          <button mat-button type="button" routerLink="/products">取消</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

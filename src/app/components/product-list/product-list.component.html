@@ -1,0 +1,69 @@
+<div class="product-list-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>商品列表</mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <div class="table-container">
+        <button mat-raised-button color="primary" 
+                routerLink="/products/new"
+                appPermission="product:create">
+          <mat-icon>add</mat-icon>
+          添加商品
+        </button>
+
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let product"> {{product.id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> 商品名称 </th>
+            <td mat-cell *matCellDef="let product"> {{product.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> 价格 </th>
+            <td mat-cell *matCellDef="let product"> {{product.price | currency:'CNY'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="category">
+            <th mat-header-cell *matHeaderCellDef> 分类 </th>
+            <td mat-cell *matCellDef="let product"> {{product.category}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="stockQuantity">
+            <th mat-header-cell *matHeaderCellDef> 库存 </th>
+            <td mat-cell *matCellDef="let product"> {{product.stockQuantity}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="createdAt">
+            <th mat-header-cell *matHeaderCellDef> 创建时间 </th>
+            <td mat-cell *matCellDef="let product"> {{product.createdAt | dateFormat}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> 操作 </th>
+            <td mat-cell *matCellDef="let product">
+              <button mat-icon-button color="primary" 
+                      [routerLink]="['/products/edit', product.id]"
+                      appPermission="product:edit">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" 
+                      (click)="deleteProduct(product.id)"
+                      appPermission="product:delete">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div> 
