@@ -1,12 +1,11 @@
 <mat-nav-list>
   <ng-container *ngFor="let item of menuItems">
     <!-- 有子菜单的情况 -->
-    <mat-expansion-panel
-      [expanded]="isPanelExpanded(item.id)"
-      (expandedChange)="togglePanel(item.id)"
-      [hideToggle]="!hasChildren(item)"
-      class="mat-elevation-z0"
-    >
+    <mat-expansion-panel *ngIf="hasChildren(item)" 
+                        [expanded]="isPanelExpanded(item.id)"
+                        (expandedChange)="togglePanel(item.id)"
+                        [hideToggle]="!hasChildren(item)"
+                        class="mat-elevation-z0">
       <mat-expansion-panel-header [ngClass]="'level-' + level">
         <mat-panel-title>
           <mat-icon *ngIf="item.icon">{{ item.icon }}</mat-icon>
@@ -15,22 +14,24 @@
       </mat-expansion-panel-header>
 
       <div class="submenu" *ngIf="hasChildren(item)">
-        <app-recursive-menu [menuItems]="getChildMenuItems(item)" [level]="level + 1">
-        </app-recursive-menu>
+        <ng-container *ngTemplateOutlet="menuTemplate; context: { $implicit: getChildMenuItems(item), level: level + 1 }">
+        </ng-container>
       </div>
     </mat-expansion-panel>
 
     <!-- 没有子菜单的情况 -->
-    <a
-      mat-list-item
-      *ngIf="!hasChildren(item)"
-      [routerLink]="item.link"
-      routerLinkActive="active"
-      [ngClass]="'level-' + level"
-      appPermission="{{ item.permission }}"
-    >
+    <a mat-list-item
+       *ngIf="!hasChildren(item)"
+       [routerLink]="item.link"
+       routerLinkActive="active"
+       [ngClass]="'level-' + level"
+       [attr.appPermission]="item.permission">
       <mat-icon *ngIf="item.icon" mat-list-icon>{{ item.icon }}</mat-icon>
       <span mat-line>{{ item.title }}</span>
     </a>
   </ng-container>
 </mat-nav-list>
+
+<ng-template #menuTemplate let-items let-level="level">
+  <app-recursive-menu [menuItems]="items" [level]="level"></app-recursive-menu>
+</ng-template>

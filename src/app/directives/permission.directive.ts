@@ -2,7 +2,8 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
 @Directive({
-  selector: '[appPermission]'
+  selector: '[appPermission]',
+  standalone: true
 })
 export class PermissionDirective implements OnInit {
   @Input('appPermission') permission: string = '';

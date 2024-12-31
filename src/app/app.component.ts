@@ -1,12 +1,29 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { AuthService } from './services/auth.service';
 import { MenuItem } from './models/menu.interface';
+import { RecursiveMenuComponent } from './components/recursive-menu/recursive-menu.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    RecursiveMenuComponent
+  ]
 })
 export class AppComponent {
   menuItems: MenuItem[] = [
@@ -72,6 +89,20 @@ export class AppComponent {
               ]
             }
           ]
+        }
+      ]
+    },
+    {
+      id: '3',
+      title: '工具',
+      icon: 'build',
+      children: [
+        {
+          id: '3-1',
+          title: '计算器',
+          icon: 'calculate',
+          link: '/calculator',
+          permission: 'tools:calculator'
         }
       ]
     }
