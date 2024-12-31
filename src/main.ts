@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
@@ -9,11 +9,14 @@ import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
 import { calculatorReducer } from './app/store/calculator/calculator.reducer';
 import { CalculatorEffects } from './app/store/calculator/calculator.effects';
+import { apiInterceptor } from './app/interceptors/api.interceptor';
 
 bootstrapApplication(AppComponent, {
   providers: [
     provideAnimations(),
-    provideHttpClient(),
+    provideHttpClient(
+      withInterceptors([apiInterceptor])
+    ),
     provideRouter(routes),
     provideStore({
       calculator: calculatorReducer
