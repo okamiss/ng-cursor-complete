@@ -11,6 +11,8 @@ import { calculatorReducer } from './app/store/calculator/calculator.reducer';
 import { CalculatorEffects } from './app/store/calculator/calculator.effects';
 import { apiInterceptor } from './app/interceptors/api.interceptor';
 
+
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideAnimations(),
@@ -28,6 +30,8 @@ bootstrapApplication(AppComponent, {
       autoPause: true,
       trace: false,
       traceLimit: 75,
-    })
+    }),
+    
+   
   ]
 }).catch(err => console.error(err)); 
